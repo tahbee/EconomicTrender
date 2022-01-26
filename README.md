@@ -1,4 +1,7 @@
 # EconomicTrender
+
+Make sure to have IDLE installed
+Run python version 3 (3.10)
 1) Requests is not a built in module (does not come with the default python installation), so you will have to install it:
 
 OSX/Linux
@@ -34,4 +37,9 @@ pip3 install pandas (although pip may be pointing to pip3 already). You can
 If you don't have pip installed, see here for installation.
 
 Reference: https://stackoverflow.com/questions/54497098/import-pandas-as-pd-importerror-no-module-named-pandas
+
+
+
+3) Install matplotlib. Command: pip3 install matplotlib
+Reference: https://stackoverflow.com/questions/18176591/importerror-no-module-named-matplotlib-pyplot
 
