@@ -4,7 +4,10 @@ import matplotlib.pyplot as pythonPlot
 import numpy
 import csv
 import datetime
+import seaborn
 from pylab import *
+from matplotlib import dates
+
 
 def economicIndicatorsData(dataOption):
     economicIndicatorsTimeStampValues = []
@@ -55,6 +58,24 @@ def economicIndicatorsData(dataOption):
     pythonPlot.ylabel('Value', fontsize=10)
     pythonPlot.grid(True)
     pythonPlot.show()
+
+    pandasDataFrame = pandas.DataFrame({
+    'date': pandas.to_datetime(economicIndicatorsTimeStampValues),
+    'Date': dates.datestr2num(economicIndicatorsTimeStampValues),
+    'Value': economicIndicatorsDataValues
+    })
+
+    @pythonPlot.FuncFormatter
+    def formattedDateValues(dateInput, position):
+        return dates.num2date(dateInput).strftime('%Y-%m-%d')
+
+    figure, axis = pythonPlot.subplots()
+    seaborn.regplot('Date', 'Value', data=pandasDataFrame, ax=axis)
+
+    axis.xaxis.set_major_formatter(formattedDateValues)
+
+    axis.tick_params(labelrotation=45)
+
 
     boxPlotFigure, axisCoordinates = pythonPlot.subplots()
     
