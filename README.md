@@ -43,3 +43,5 @@ Reference: https://stackoverflow.com/questions/54497098/import-pandas-as-pd-impo
 3) Install matplotlib. Command: pip3 install matplotlib
 Reference: https://stackoverflow.com/questions/18176591/importerror-no-module-named-matplotlib-pyplot
 
+4) Install seaborn. Command: pip3 install seaborn
+
