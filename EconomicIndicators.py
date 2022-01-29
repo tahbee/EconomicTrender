@@ -72,6 +72,18 @@ def economicIndicatorsData(dataOption):
     figure, axis = pythonPlot.subplots()
     seaborn.regplot('Date', 'Value', data=pandasDataFrame, ax=axis)
 
+    if (dataOption == 1):
+        axis.set_title('Scatter Plot For Annual Real GDP of US per year (With 95% Confidence Interval Linear Regression Model Fit)')
+        
+    elif (dataOption == 4):
+        axis.set_title('Scatter Plot For Monthly Unemployment rates of US (With 95% Confidence Interval Linear Regression Model Fit)')
+        
+    elif (dataOption == 2):
+        axis.set_title('Scatter Plot For Monthly Interest rates of US (With 95% Confidence Interval Linear Regression Model Fit)')
+        
+    elif (dataOption == 3):
+        axis.set_title('Scatter Plot For Annual Inflation rates of US (With 95% Confidence Interval Linear Regression Model Fit)')
+
     axis.xaxis.set_major_formatter(formattedDateValues)
 
     axis.tick_params(labelrotation=45)
@@ -131,16 +143,21 @@ def economicIndicatorsData(dataOption):
         except:
             print("An exception occurred")
             
-
-dataFeedOptionInput = input ("This program shows the data containing the following options: 1) Annual Real GDP of US, 2) Monthly interest rates of US, 3) Annual Inflation rates of US and 4) Monthly Unemployment data of US. Enter an option number to continue: ")
+while (True):
+    dataFeedOptionInput = input ("\nThis program shows the data containing the following options: 1) Annual Real GDP of US, 2) Monthly interest rates of US, 3) Annual Inflation rates of US and 4) Monthly Unemployment data of US. Enter an option number to continue or 0 to end the program: ")
     
-if (int(dataFeedOptionInput) == 1):
-    economicIndicatorsData(1)
-elif (int(dataFeedOptionInput) == 2):
-    economicIndicatorsData(2)
-elif (int(dataFeedOptionInput) == 3):
-    economicIndicatorsData(3)
-elif (int(dataFeedOptionInput) == 4):
-    economicIndicatorsData(4)    
-else:
-  print("End Of Program")    
+    if (int(dataFeedOptionInput) == 1):
+        economicIndicatorsData(1)
+        continue
+    elif (int(dataFeedOptionInput) == 2):
+        economicIndicatorsData(2)
+        continue
+    elif (int(dataFeedOptionInput) == 3):
+        economicIndicatorsData(3)
+        continue
+    elif (int(dataFeedOptionInput) == 4):
+        economicIndicatorsData(4)
+        continue
+    else:
+      print("End Of Program")
+      break
