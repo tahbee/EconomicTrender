@@ -16,101 +16,75 @@ def printStockDataGraphsAndCSVFile(stockDataType, equityNameSymbolPrompt):
     stockVolumeValues = []
 
     stockTimeSeriesAPIUrl = ""
-    
-    if (stockDataType == "intraday"):
-        stockTimeSeriesAPIUrl = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol='+equityNameSymbolPrompt+'&interval=5min&apikey=J4RQ2HAVH7OZNSRM'
-    elif (stockDataType == "daily"):
-        stockTimeSeriesAPIUrl = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol='+equityNameSymbolPrompt+'&apikey=J4RQ2HAVH7OZNSRM'
-    elif (stockDataType == "weekly"):
-        stockTimeSeriesAPIUrl = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol='+equityNameSymbolPrompt+'&apikey=J4RQ2HAVH7OZNSRM'
-    elif (stockDataType == "monthly"):
-        stockTimeSeriesAPIUrl = 'https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol='+equityNameSymbolPrompt+'&apikey=J4RQ2HAVH7OZNSRM'
-        
-        
-    stockDataFeedResponse = requests.get(stockTimeSeriesAPIUrl)
-    stockData = stockDataFeedResponse.json()
 
-    timeSeriesJSONArray = stockData[list(stockData.keys())[1]]
-    for timeSeriesKey in timeSeriesJSONArray:
-        timeSeriesJSONObject = timeSeriesJSONArray[timeSeriesKey]
+    mostRecentStockClosePriceValues, mostRecentStockHighPriceValues, mostRecentStockLowPriceValues, mostRecentStockOpenPriceValues, mostRecentStockTimeStampValues, mostRecentStockVolumeValues = getStockInfoFromAPI(
+        equityNameSymbolPrompt, stockClosePriceValues, stockDataType, stockHighPriceValues, stockLowPriceValues,
+        stockOpenPriceValues, stockTimeSeriesAPIUrl, stockTimeStampValues, stockVolumeValues)
 
-        stockTimeStampValues.append(timeSeriesKey)
-        
-        stockOpenPriceValues.append(timeSeriesJSONObject["1. open"])
-
-        stockHighPriceValues.append(timeSeriesJSONObject["2. high"])
-
-        stockLowPriceValues.append(timeSeriesJSONObject["3. low"])
-
-        stockClosePriceValues.append(timeSeriesJSONObject["4. close"])
-
-        stockVolumeValues.append(timeSeriesJSONObject["5. volume"])
-
-    mostRecentStockTimeStampValues = stockTimeStampValues[:5]
-
-    mostRecentStockOpenPriceValues = stockOpenPriceValues[:5]
-
-    mostRecentStockHighPriceValues = stockHighPriceValues[:5]
-
-    mostRecentStockLowPriceValues = stockLowPriceValues[:5]
-
-    mostRecentStockClosePriceValues = stockClosePriceValues[:5]
-
-    mostRecentStockVolumeValues = stockVolumeValues[:5]
-        
     pandasDataFrame = pandas.DataFrame(dict(graph=mostRecentStockTimeStampValues,
                            openingPrice=mostRecentStockOpenPriceValues,
                                             highPrice=mostRecentStockHighPriceValues,
                                             lowPrice=mostRecentStockLowPriceValues,
                                             closingPrice=mostRecentStockClosePriceValues,
                                             volume=mostRecentStockVolumeValues))
-    XAxisCoordinateLocations = numpy.arange(5)
     margin = 0.03
-    numberItems=5
-    width = (1-(margin*numberItems))/numberItems
+    numberColumns=5
+    XAxisCoordinateLocations = numpy.arange(numberColumns)
+    width = (1-(margin*numberColumns))/numberColumns
 
-    figure, axis = pythonPlot.subplots()
-    axis.barh(XAxisCoordinateLocations, pandasDataFrame.openingPrice, width, color='red', label='Opening Price', align='center')
-    axis.barh(XAxisCoordinateLocations - width, pandasDataFrame.highPrice, width, color='green', label='High Price',align='center')
-    axis.barh(XAxisCoordinateLocations - width*2, pandasDataFrame.lowPrice, width, color='blue', label='Low Price',align='center')
-    axis.barh(XAxisCoordinateLocations + width*2, pandasDataFrame.closingPrice, width, color='yellow', label='Closing Price',align='center')
-    axis.barh(XAxisCoordinateLocations + width, pandasDataFrame.volume, width, color='purple', label='Volume',align='center')
+    figure,  (plot_price, plot_volume) = pythonPlot.subplots(2)
+    plot_price.barh(XAxisCoordinateLocations, pandasDataFrame.openingPrice, width, color='red', label='Opening Price', align='center')
+    plot_price.barh(XAxisCoordinateLocations - width, pandasDataFrame.highPrice, width, color='green', label='High Price',align='center')
+    plot_price.barh(XAxisCoordinateLocations - width*2, pandasDataFrame.lowPrice, width, color='blue', label='Low Price',align='center')
+    plot_price.barh(XAxisCoordinateLocations + width*2, pandasDataFrame.closingPrice, width, color='yellow', label='Closing Price', align='center')
+    plot_price.set(yticks=XAxisCoordinateLocations + width, yticklabels=pandasDataFrame.graph, ylim=[2*width - 1, len(pandasDataFrame)])
+    plot_price.legend()
 
-    axis.set(yticks=XAxisCoordinateLocations + width, yticklabels=pandasDataFrame.graph, ylim=[2*width - 1, len(pandasDataFrame)])
-    axis.legend()
+    plot_volume.barh(XAxisCoordinateLocations + width, pandasDataFrame.volume, width, color='purple', label='Volume',align='center')
+    plot_volume.set(yticks=XAxisCoordinateLocations + width, yticklabels=pandasDataFrame.graph,ylim=[2 * width - 1, len(pandasDataFrame)])
+    plot_volume.legend()
 
     if (stockDataType == "intraday"):
-        pythonPlot.title('Stock Trends Intraday Horizontal Bar Chart')
+        plot_price.set_title('Stock Price Trends Intraday Horizontal Bar Chart')
+        plot_volume.set_title('Stock Volume Trends Intraday Horizontal Bar Chart')
     elif (stockDataType == "daily"):
-        pythonPlot.title('Stock Trends Daily Horizontal Bar Chart')
+        plot_price.set_title('Stock Price Trends Daily Horizontal Bar Chart')
+        plot_volume.set_title('Stock Volume Trends Daily Horizontal Bar Chart')
     elif (stockDataType == "weekly"):
-        pythonPlot.title('Stock Trends Weekly Horizontal Bar Chart')
+        plot_price.set_title('Stock Price Trends Weekly Horizontal Bar Chart')
+        plot_volume.set_title('Stock Volume Trends Weekly Horizontal Bar Chart')
     elif (stockDataType == "monthly"):
-        pythonPlot.title('Stock Trends Monthly Horizontal Bar Chart')
+        plot_price.set_title('Stock Price Trends Monthly Horizontal Bar Chart')
+        plot_volume.set_title('Stock Volume Trends Monthly Horizontal Bar Chart')
 
 
     pythonPlot.show()
         
-    boxPlotFigure, axisCoordinates = pythonPlot.subplots()
+    boxPlotFigure, (box_plot_price, box_plot_volume)  = pythonPlot.subplots(2)
     
-    pandasDataFrame = pandas.DataFrame({
-                                        'Open Price': list(map(float, stockOpenPriceValues)),
+    pandasDataFrame = pandas.DataFrame({ 'Open Price': list(map(float, stockOpenPriceValues)),
                         'High Price': list(map(float, stockHighPriceValues)),
                         'Low Price': list(map(float, stockLowPriceValues)),
                         'Close Price': list(map(float, stockClosePriceValues)),
                         'Volume': list(map(float, stockVolumeValues))})
 
-    axisCoordinates = pandasDataFrame.boxplot(column=['Open Price', 'High Price', 'Low Price', 'Close Price', 'Volume'], figsize=(15,5), grid=True)
+    pandasDataFrame.boxplot(column=['Open Price', 'High Price', 'Low Price', 'Close Price'], figsize=(15,5), grid=True,ax=box_plot_price)
+    pandasDataFrame.boxplot(column=[ 'Volume'], figsize=(15,5), grid=True, ax=box_plot_volume)
 
     if (stockDataType == "intraday"):
-        axisCoordinates.set_title('Stock Trends Intraday Box Plot')
+        box_plot_price.set_title('Stock Price Trends Intraday Box Plot')
+        box_plot_volume.set_title('Stock Volume Trends Intraday Box Plot ')
     elif (stockDataType == "daily"):
-        axisCoordinates.set_title('Stock Trends Daily Box Plot')
+        box_plot_price.set_title('Stock Price Trends Daily Box Plot')
+        box_plot_volume.set_title('Stock Volume Trends Daily Box Plot ')
     elif (stockDataType == "weekly"):
-        axisCoordinates.set_title('Stock Trends Weekly Box Plot')
+        box_plot_price.set_title('Stock Price Trends Weekly Box Plot')
+        box_plot_volume.set_title('Stock Volume Trends Weekly Box Plot')
     elif (stockDataType == "monthly"):
-        axisCoordinates.set_title('Stock Trends Monthly Box Plot')
+        box_plot_price.set_title('Stock Price Trends Monthly Box Plot')
+        box_plot_volume.set_title('Stock Volume Trends Monthly Box Plot')
 
+    #axisCoordinates[0].plot()
     pythonPlot.show()    
 
     csvDownloadPrompt = input("Do you want to download the entire dataset? (y/n): ")
@@ -148,6 +122,44 @@ def printStockDataGraphsAndCSVFile(stockDataType, equityNameSymbolPrompt):
                 print("All files are successfully saved. Please check your Documents, Downloads or any other folders in C drive or Finder where you set the default download path.")        
         except:
             print("An exception occurred")
+
+
+def getStockInfoFromAPI(equityNameSymbolPrompt, stockClosePriceValues, stockDataType, stockHighPriceValues,
+                        stockLowPriceValues, stockOpenPriceValues, stockTimeSeriesAPIUrl, stockTimeStampValues,
+                        stockVolumeValues):
+    if (stockDataType == "intraday"):
+        stockTimeSeriesAPIUrl = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + equityNameSymbolPrompt + '&interval=5min&apikey=J4RQ2HAVH7OZNSRM'
+    elif (stockDataType == "daily"):
+        stockTimeSeriesAPIUrl = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + equityNameSymbolPrompt + '&apikey=J4RQ2HAVH7OZNSRM'
+    elif (stockDataType == "weekly"):
+        stockTimeSeriesAPIUrl = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=' + equityNameSymbolPrompt + '&apikey=J4RQ2HAVH7OZNSRM'
+    elif (stockDataType == "monthly"):
+        stockTimeSeriesAPIUrl = 'https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=' + equityNameSymbolPrompt + '&apikey=J4RQ2HAVH7OZNSRM'
+    stockDataFeedResponse = requests.get(stockTimeSeriesAPIUrl)
+    stockData = stockDataFeedResponse.json()
+    timeSeriesJSONArray = stockData[list(stockData.keys())[1]]
+    for timeSeriesKey in timeSeriesJSONArray:
+        timeSeriesJSONObject = timeSeriesJSONArray[timeSeriesKey]
+
+        stockTimeStampValues.append(timeSeriesKey)
+
+        stockOpenPriceValues.append(timeSeriesJSONObject["1. open"])
+
+        stockHighPriceValues.append(timeSeriesJSONObject["2. high"])
+
+        stockLowPriceValues.append(timeSeriesJSONObject["3. low"])
+
+        stockClosePriceValues.append(timeSeriesJSONObject["4. close"])
+
+        stockVolumeValues.append(timeSeriesJSONObject["5. volume"])
+    mostRecentStockTimeStampValues = stockTimeStampValues[:5]
+    mostRecentStockOpenPriceValues = stockOpenPriceValues[:5]
+    mostRecentStockHighPriceValues = stockHighPriceValues[:5]
+    mostRecentStockLowPriceValues = stockLowPriceValues[:5]
+    mostRecentStockClosePriceValues = stockClosePriceValues[:5]
+    mostRecentStockVolumeValues = stockVolumeValues[:5]
+    return mostRecentStockClosePriceValues, mostRecentStockHighPriceValues, mostRecentStockLowPriceValues, mostRecentStockOpenPriceValues, mostRecentStockTimeStampValues, mostRecentStockVolumeValues
+
 
 def printCryptoDataGraphsAndCSVFile(cryptoDataType, equityNameSymbolPrompt, exchangeMarketPrompt):
 
