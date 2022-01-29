@@ -3,7 +3,6 @@ import pandas
 import matplotlib.pyplot as pythonPlot
 import numpy
 import csv
-import datetime
 from pylab import *
 
 
@@ -65,16 +64,17 @@ def printStockDataGraphsAndCSVFile(stockDataType, equityNameSymbolPrompt):
                                             lowPrice=mostRecentStockLowPriceValues,
                                             closingPrice=mostRecentStockClosePriceValues,
                                             volume=mostRecentStockVolumeValues))
-
     XAxisCoordinateLocations = numpy.arange(5)
-    width = 0.2
+    margin = 0.03
+    numberItems=5
+    width = (1-(margin*numberItems))/numberItems
 
     figure, axis = pythonPlot.subplots()
-    axis.barh(XAxisCoordinateLocations, pandasDataFrame.openingPrice, width, color='red', label='Opening Price')
-    axis.barh(XAxisCoordinateLocations - 0.4, pandasDataFrame.highPrice, width, color='green', label='High Price')
-    axis.barh(XAxisCoordinateLocations - 0.2, pandasDataFrame.lowPrice, width, color='blue', label='Low Price')
-    axis.barh(XAxisCoordinateLocations + 0.2, pandasDataFrame.closingPrice, width, color='yellow', label='Closing Price')
-    axis.barh(XAxisCoordinateLocations + 0.4, pandasDataFrame.volume, width, color='purple', label='Volume')
+    axis.barh(XAxisCoordinateLocations, pandasDataFrame.openingPrice, width, color='red', label='Opening Price', align='center')
+    axis.barh(XAxisCoordinateLocations - width, pandasDataFrame.highPrice, width, color='green', label='High Price',align='center')
+    axis.barh(XAxisCoordinateLocations - width*2, pandasDataFrame.lowPrice, width, color='blue', label='Low Price',align='center')
+    axis.barh(XAxisCoordinateLocations + width*2, pandasDataFrame.closingPrice, width, color='yellow', label='Closing Price',align='center')
+    axis.barh(XAxisCoordinateLocations + width, pandasDataFrame.volume, width, color='purple', label='Volume',align='center')
 
     axis.set(yticks=XAxisCoordinateLocations + width, yticklabels=pandasDataFrame.graph, ylim=[2*width - 1, len(pandasDataFrame)])
     axis.legend()
