@@ -4,6 +4,7 @@ import matplotlib.pyplot as pythonPlot
 import numpy
 import csv
 from pylab import *
+import sys
 
 
 def printStockDataGraphsAndCSVFile(stockDataType, equityNameSymbolPrompt):
@@ -137,7 +138,15 @@ def getStockInfoFromAPI(equityNameSymbolPrompt, stockClosePriceValues, stockData
         stockTimeSeriesAPIUrl = 'https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=' + equityNameSymbolPrompt + '&apikey=J4RQ2HAVH7OZNSRM'
     stockDataFeedResponse = requests.get(stockTimeSeriesAPIUrl)
     stockData = stockDataFeedResponse.json()
-    timeSeriesJSONArray = stockData[list(stockData.keys())[1]]
+
+    try:
+        timeSeriesJSONArray = stockData[list(stockData.keys())[1]]
+    except IndexError:
+        print("Invalid stock symbol. Please try again.")
+        sys.exit(1)
+    except Exception as e:
+        print(e)
+
     for timeSeriesKey in timeSeriesJSONArray:
         timeSeriesJSONObject = timeSeriesJSONArray[timeSeriesKey]
 
@@ -484,11 +493,13 @@ def printForexGraphsAndCSVFile(forexDataType, fromSymbolPrompt, toSymbolPrompt):
     
 while (True):
     dataFeedOptionInput = input ("\nWelcome to Economic Trender application! We will display data for the " +
-             "following 3 categories of data: Option 1 - Stock Time Series, " +
-             "Option 2 - Foreign Exchange Rate, Option 3 - Cryptocurrencies. " +
-             "Please enter a number between 1-3 to choose an option from the 3 categories above or press 0 to end the program: ")
+             "following 3 categories of data:"
+             "\nOption 1 - Stock Time Series" +
+             "\nOption 2 - Foreign Exchange Rate"
+             "\nOption 3 - Cryptocurrencies" +
+             "\nPlease enter a number between 1-3 to choose an option from the 3 categories above or press 0 to end the program: ")
     
-    if (int(dataFeedOptionInput) == 1):
+    if int(dataFeedOptionInput) == 1:
         equityNameSymbolPrompt = input("Please enter the Stock symbol of the equity you want to see information for: ")
 
         typeOfData = input("Do you want to see intraday (5 minute interval), daily, weekly or monthly data? Enter i for intraday, d for daily, w for weekly, and m for monthly: ")
