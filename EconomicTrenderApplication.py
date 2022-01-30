@@ -257,50 +257,59 @@ def printCryptoDataGraphsAndCSVFile(cryptoDataType, equityNameSymbolPrompt, exch
                                             closingPrice=mostRecentCryptoClosePriceValues,
                                             volume=mostRecentCryptoVolumeValues))
 
-    XAxisCoordinateLocations = numpy.arange(5)
-    width = 0.2
+    margin = 0.03
+    numberColumns=5
+    XAxisCoordinateLocations = numpy.arange(numberColumns)
+    width = (1-(margin*numberColumns))/numberColumns
 
-    figure, axis = pythonPlot.subplots()
-    axis.barh(XAxisCoordinateLocations, pandasDataFrame.openingPrice, width, color='red', label='Opening Price')
-    axis.barh(XAxisCoordinateLocations - 0.4, pandasDataFrame.highPrice, width, color='green', label='High Price')
-    axis.barh(XAxisCoordinateLocations - 0.2, pandasDataFrame.lowPrice, width, color='blue', label='Low Price')
-    axis.barh(XAxisCoordinateLocations + 0.2, pandasDataFrame.closingPrice, width, color='yellow', label='Closing Price')
-    axis.barh(XAxisCoordinateLocations + 0.4, pandasDataFrame.volume, width, color='purple', label='Volume')
-
-    axis.set(yticks=XAxisCoordinateLocations + width, yticklabels=pandasDataFrame.graph, ylim=[2*width - 1, len(pandasDataFrame)])
-    axis.legend()
+    figure, (plot_price, plot_volume) = pythonPlot.subplots(2)
+    plot_price.barh(XAxisCoordinateLocations, pandasDataFrame.openingPrice, width, color='red', label='Opening Price',  align='center')
+    plot_price.barh(XAxisCoordinateLocations - width * 2, pandasDataFrame.highPrice, width, color='green', label='High Price', align='center')
+    plot_price.barh(XAxisCoordinateLocations - width, pandasDataFrame.lowPrice, width, color='blue', label='Low Price', align='center')
+    plot_price.barh(XAxisCoordinateLocations + width, pandasDataFrame.closingPrice, width, color='yellow', label='Closing Price', align='center')
+    plot_price.set(yticks=XAxisCoordinateLocations + width, yticklabels=pandasDataFrame.graph, ylim=[2*width - 1, len(pandasDataFrame)])
+    plot_price.legend()
+    plot_volume.barh(XAxisCoordinateLocations, pandasDataFrame.volume, .5, color='purple', label='Volume', align='center')
+    plot_volume.set(yticks=XAxisCoordinateLocations + width, yticklabels=pandasDataFrame.graph, ylim=[2*width - 1, len(pandasDataFrame)])
+    plot_volume.legend()
 
     if (cryptoDataType == "intraday"):
-        pythonPlot.title('Crypto Trends Intraday Horizontal Bar Chart')
+        plot_price.set_title('Crypto Price Trends Intraday Horizontal Bar Chart')
+        plot_volume.set_title('Crypto Volume Trends Intraday Horizontal Bar Chart')
     elif (cryptoDataType == "daily"):
-        pythonPlot.title('Crypto Trends Daily Horizontal Bar Chart')
+        plot_price.set_title('Crypto Price Trends Daily Horizontal Bar Chart')
+        plot_volume.set_title('Crypto Volume Trends Daily Horizontal Bar Chart')
     elif (cryptoDataType == "weekly"):
-        pythonPlot.title('Crypto Trends Weekly Horizontal Bar Chart')
+        plot_price.set_title('Crypto Price Trends Weekly Horizontal Bar Chart')
+        plot_volume.set_title('Crypto Volume Trends Weekly Horizontal Bar Chart')
     elif (cryptoDataType == "monthly"):
-        pythonPlot.title('Crypto Trends Monthly Horizontal Bar Chart')
-
-
+        plot_price.set_title('Crypto Price Trends Monthly Horizontal Bar Chart')
+        plot_volume.set_title('Crypto Volume Trends Monthly Horizontal Bar Chart')
     pythonPlot.show()
         
-    boxPlotFigure, axisCoordinates = pythonPlot.subplots()
+    boxPlotFigure, (boxplot_price, boxplot_volume) = pythonPlot.subplots(2)
     
-    pandasDataFrame = pandas.DataFrame({
-                                        'Open Price': list(map(float, cryptoOpenPriceValues)),
+    pandasDataFrame = pandas.DataFrame({ 'Open Price': list(map(float, cryptoOpenPriceValues)),
                         'High Price': list(map(float, cryptoHighPriceValues)),
                         'Low Price': list(map(float, cryptoLowPriceValues)),
                         'Close Price': list(map(float, cryptoClosePriceValues)),
                         'Volume': list(map(float, cryptoVolumeValues))})
 
-    axisCoordinates = pandasDataFrame.boxplot(column=['Open Price', 'High Price', 'Low Price', 'Close Price', 'Volume'], figsize=(15,5), grid=True)
+    pandasDataFrame.boxplot(column=['Open Price', 'High Price', 'Low Price', 'Close Price'], figsize=(15,5), grid=True, ax=boxplot_price)
+    pandasDataFrame.boxplot(column=['Volume'], figsize=(15,5), grid=True, ax=boxplot_volume)
 
     if (cryptoDataType == "intraday"):
-        axisCoordinates.set_title('Crypto Trends Intraday Box Plot')
+        boxplot_price.set_title('Crypto Price Trends Intraday Box Plot')
+        boxplot_volume.set_title('Crypto Volume Trends Intraday Box Plot')
     elif (cryptoDataType == "daily"):
-        axisCoordinates.set_title('Crypto Trends Daily Box Plot')
+        boxplot_price.set_title('Crypto Price Trends Daily Box Plot')
+        boxplot_volume.set_title('Crypto Volume Trends Daily Box Plot')
     elif (cryptoDataType == "weekly"):
-        axisCoordinates.set_title('Crypto Trends Weekly Box Plot')
+        boxplot_price.set_title('Crypto Price Trends Weekly Box Plot')
+        boxplot_volume.set_title('Crypto Volume Trends Weekly Box Plot')
     elif (cryptoDataType == "monthly"):
-        axisCoordinates.set_title('Crypto Trends Monthly Box Plot')
+        boxplot_price.set_title('Crypto Price Trends Monthly Box Plot')
+        boxplot_volume.set_title('Crypto Volume Trends Monthly Box Plot')
 
     pythonPlot.show()    
 
