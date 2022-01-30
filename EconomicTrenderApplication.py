@@ -189,17 +189,55 @@ def printCryptoDataGraphsAndCSVFile(cryptoDataType, equityNameSymbolPrompt, exch
         timeSeriesJSONObject = timeSeriesJSONArray[timeSeriesKey]
 
         cryptoTimeStampValues.append(timeSeriesKey)
-        
-        cryptoOpenPriceValues.append(timeSeriesJSONObject["1. open"])
 
-        cryptoHighPriceValues.append(timeSeriesJSONObject["2. high"])
 
-        cryptoLowPriceValues.append(timeSeriesJSONObject["3. low"])
+        if (cryptoDataType == "intraday"):
 
-        cryptoClosePriceValues.append(timeSeriesJSONObject["4. close"])
+            cryptoOpenPriceValues.append(timeSeriesJSONObject["1. open"])
 
-        cryptoVolumeValues.append(timeSeriesJSONObject["5. volume"])
+            cryptoHighPriceValues.append(timeSeriesJSONObject["2. high"])
 
+            cryptoLowPriceValues.append(timeSeriesJSONObject["3. low"])
+
+            cryptoClosePriceValues.append(timeSeriesJSONObject["4. close"])
+
+            cryptoVolumeValues.append(timeSeriesJSONObject["5. volume"])
+
+        elif (cryptoDataType == "daily"):
+            cryptoOpenPriceValues.append(timeSeriesJSONObject["1a. open (" + exchangeMarketPrompt +")"])
+
+            cryptoHighPriceValues.append(timeSeriesJSONObject["2a. high (" + exchangeMarketPrompt +")"])
+
+            cryptoLowPriceValues.append(timeSeriesJSONObject["3a. low (" + exchangeMarketPrompt + ")"])
+
+            cryptoClosePriceValues.append(timeSeriesJSONObject["4a. close (" + exchangeMarketPrompt + ")"])
+
+            cryptoVolumeValues.append(timeSeriesJSONObject["5. volume"])
+            
+
+        elif (cryptoDataType == "weekly"):
+            cryptoOpenPriceValues.append(timeSeriesJSONObject["1a. open (" + exchangeMarketPrompt +")"])
+
+            cryptoHighPriceValues.append(timeSeriesJSONObject["2a. high (" + exchangeMarketPrompt +")"])
+
+            cryptoLowPriceValues.append(timeSeriesJSONObject["3a. low (" + exchangeMarketPrompt + ")"])
+
+            cryptoClosePriceValues.append(timeSeriesJSONObject["4a. close (" + exchangeMarketPrompt + ")"])
+
+            cryptoVolumeValues.append(timeSeriesJSONObject["5. volume"])
+            
+
+        elif (cryptoDataType == "monthly"):
+            cryptoOpenPriceValues.append(timeSeriesJSONObject["1a. open (" + exchangeMarketPrompt +")"])
+
+            cryptoHighPriceValues.append(timeSeriesJSONObject["2a. high (" + exchangeMarketPrompt +")"])
+
+            cryptoLowPriceValues.append(timeSeriesJSONObject["3a. low (" + exchangeMarketPrompt + ")"])
+
+            cryptoClosePriceValues.append(timeSeriesJSONObject["4a. close (" + exchangeMarketPrompt + ")"])
+
+            cryptoVolumeValues.append(timeSeriesJSONObject["5. volume"])
+     
     mostRecentCryptoTimeStampValues = cryptoTimeStampValues[:5]
 
     mostRecentCryptoOpenPriceValues = cryptoOpenPriceValues[:5]
@@ -270,7 +308,7 @@ def printCryptoDataGraphsAndCSVFile(cryptoDataType, equityNameSymbolPrompt, exch
 
     if (csvDownloadPrompt == 'y'):
         try:
-            stockTrendsCSVHeader = ['TimeStamp','Opening Price', 'High Price', 'Low Price', 'Closing Price', 'Volume']
+            cryptoTrendsCSVHeader = ['TimeStamp','Opening Price', 'High Price', 'Low Price', 'Closing Price', 'Volume']
 
             currentTime = datetime.datetime.now()
 
@@ -299,8 +337,8 @@ def printCryptoDataGraphsAndCSVFile(cryptoDataType, equityNameSymbolPrompt, exch
                     cryptoCSVWriter.writerow(cryptoItem)
             
                 print("All files are successfully saved. Please check your Documents, Downloads or any other folders in C drive or Finder where you set the default download path.")        
-        except:
-            print("An exception occurred")
+        except Exception as e:
+            print("Exception: " + e)
 
 
 def printForexGraphsAndCSVFile(forexDataType, fromSymbolPrompt, toSymbolPrompt):
