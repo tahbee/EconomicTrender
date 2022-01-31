@@ -38,8 +38,8 @@ def printStockDataGraphsAndCSVFile(stockDataType, equityNameSymbolPrompt):
                     align='center')
     plot_price.barh(XAxisCoordinateLocations - width, pandasDataFrame.highPrice, width, color='green',
                     label='High Price', align='center')
-    plot_price.barh(XAxisCoordinateLocations - width * 2, pandasDataFrame.lowPrice, width, color='blue',
-                    label='Low Price', align='center')
+    plot_price.barh(XAxisCoordinateLocations + width, pandasDataFrame.lowPrice, width, color='blue', label='Low Price',
+                    align='center')
     plot_price.barh(XAxisCoordinateLocations + width * 2, pandasDataFrame.closingPrice, width, color='yellow',
                     label='Closing Price', align='center')
     plot_price.set(yticks=XAxisCoordinateLocations + width, yticklabels=pandasDataFrame.graph,
