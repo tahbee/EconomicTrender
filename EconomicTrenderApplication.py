@@ -32,7 +32,6 @@ def printStockDataGraphsAndCSVFile(stockDataType, equityNameSymbolPrompt):
     numberColumns = 5
     XAxisCoordinateLocations = numpy.arange(numberColumns)
     width = (1 - (margin * numberColumns)) / numberColumns
-
     figure, (plot_price, plot_volume) = pythonPlot.subplots(2)
     plot_price.barh(XAxisCoordinateLocations, pandasDataFrame.openingPrice, width, color='red', label='Opening Price',
                     align='center')
@@ -170,11 +169,11 @@ def getStockInfoFromAPI(equityNameSymbolPrompt, stockClosePriceValues, stockData
 
         stockVolumeValues.append(timeSeriesJSONObject["5. volume"])
     mostRecentStockTimeStampValues = stockTimeStampValues[:5]
-    mostRecentStockOpenPriceValues = stockOpenPriceValues[:5]
-    mostRecentStockHighPriceValues = stockHighPriceValues[:5]
-    mostRecentStockLowPriceValues = stockLowPriceValues[:5]
-    mostRecentStockClosePriceValues = stockClosePriceValues[:5]
-    mostRecentStockVolumeValues = stockVolumeValues[:5]
+    mostRecentStockOpenPriceValues =  [float(x) for x in stockOpenPriceValues[:5]]
+    mostRecentStockHighPriceValues = [float(x) for x in stockHighPriceValues[:5]]
+    mostRecentStockLowPriceValues = [ float(x) for x in stockLowPriceValues[:5]]
+    mostRecentStockClosePriceValues = [float(x) for x in stockClosePriceValues[:5]]
+    mostRecentStockVolumeValues = [int(x) for x in stockVolumeValues[:5]]
     return mostRecentStockClosePriceValues, mostRecentStockHighPriceValues, mostRecentStockLowPriceValues, mostRecentStockOpenPriceValues, mostRecentStockTimeStampValues, mostRecentStockVolumeValues
 
 
