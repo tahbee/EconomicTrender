@@ -261,15 +261,15 @@ def printCryptoDataGraphsAndCSVFile(cryptoDataType, equityNameSymbolPrompt, exch
 
     mostRecentCryptoTimeStampValues = cryptoTimeStampValues[:5]
 
-    mostRecentCryptoOpenPriceValues = cryptoOpenPriceValues[:5]
+    mostRecentCryptoOpenPriceValues = [float(x) for x in cryptoOpenPriceValues[:5]]
 
-    mostRecentCryptoHighPriceValues = cryptoHighPriceValues[:5]
+    mostRecentCryptoHighPriceValues = [float(x) for x in cryptoHighPriceValues[:5]]
 
-    mostRecentCryptoLowPriceValues = cryptoLowPriceValues[:5]
+    mostRecentCryptoLowPriceValues = [float(x) for x in cryptoLowPriceValues[:5]]
 
-    mostRecentCryptoClosePriceValues = cryptoClosePriceValues[:5]
+    mostRecentCryptoClosePriceValues = [float(x) for x in cryptoClosePriceValues[:5]]
 
-    mostRecentCryptoVolumeValues = cryptoVolumeValues[:5]
+    mostRecentCryptoVolumeValues = [float(x) for x in cryptoVolumeValues[:5]]
 
     pandasDataFrame = pandas.DataFrame(dict(graph=mostRecentCryptoTimeStampValues,
                                             openingPrice=mostRecentCryptoOpenPriceValues,
