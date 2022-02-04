@@ -109,6 +109,20 @@ def economicIndicatorsData(dataOption):
 
     pythonPlot.show()
 
+    centralTendencyMeasures = pandasDataFrame.describe()
+    if (dataOption == 1):
+        print('Central Tendency Measures of Annual Real GDP of US per year= \n', centralTendencyMeasures)
+        
+    elif (dataOption == 4):
+        print('Central Tendency Measures of Monthly Unemployment Rate Of US= \n', centralTendencyMeasures)
+
+        
+    elif (dataOption == 2):
+        print('Central Tendency Measures of Monthly Interest Rate Of US= \n', centralTendencyMeasures)
+
+    elif (dataOption == 3):
+        print('Central Tendency Measures of Annual Inflation Rate Of US per year= \n', centralTendencyMeasures)
+   
     csvDownloadPrompt = input("Do you want to download the entire dataset? (y/n): ")
 
     if (csvDownloadPrompt == 'y'):
@@ -121,15 +135,20 @@ def economicIndicatorsData(dataOption):
 
             if (dataOption == 1):
                 fileNameToSave = 'Annual_US_GDP_'+str(currentTime)+'.csv'
+                centralTendencyMeasures.to_csv("CentralTendencyMeasures_"+fileNameToSave)
 
             elif (dataOption == 4):
                 fileNameToSave = 'Monthly_Unemployment_Data_'+str(currentTime)+'.csv'
+                centralTendencyMeasures.to_csv("CentralTendencyMeasures_"+fileNameToSave)
 
             elif (dataOption == 2):
                 fileNameToSave = 'Monthly_Interest_Rate_'+str(currentTime)+'.csv'
+                centralTendencyMeasures.to_csv("CentralTendencyMeasures_"+fileNameToSave)
 
             elif (dataOption == 3):
                 fileNameToSave = 'Annual_Inflation_Rate_'+str(currentTime)+'.csv'
+                centralTendencyMeasures.to_csv("CentralTendencyMeasures_"+fileNameToSave)
+
     
             with open(fileNameToSave, 'w', encoding="utf-8") as economicIndicatorsCSVFile:
                 economicIndicatorsCSVWriter = csv.writer(economicIndicatorsCSVFile, delimiter='\t')

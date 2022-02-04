@@ -74,20 +74,31 @@ def printStockDataGraphsAndCSVFile(stockDataType, equityNameSymbolPrompt):
                                         'Close Price': list(map(float, stockClosePriceValues)),
                                         'Volume': list(map(float, stockVolumeValues))})
 
+    centralTendencyMeasures = pandasDataFrame.describe()
+
+
     pandasDataFrame.boxplot(column=['Open Price', 'High Price', 'Low Price', 'Close Price'], figsize=(15, 5), grid=True,
                             ax=box_plot_price)
     pandasDataFrame.boxplot(column=['Volume'], figsize=(15, 5), grid=True, ax=box_plot_volume)
 
     if (stockDataType == "intraday"):
+        print("\nIntraday Stock Central Tendency Measures: \n", centralTendencyMeasures)
+
         box_plot_price.set_title('Stock Price Trends Intraday Box Plot')
         box_plot_volume.set_title('Stock Volume Trends Intraday Box Plot ')
     elif (stockDataType == "daily"):
+        print("\nDaily Stock Central Tendency Measures: \n", centralTendencyMeasures)
+
         box_plot_price.set_title('Stock Price Trends Daily Box Plot')
         box_plot_volume.set_title('Stock Volume Trends Daily Box Plot ')
     elif (stockDataType == "weekly"):
+        print("\nWeekly Stock Central Tendency Measures: \n", centralTendencyMeasures)
+
         box_plot_price.set_title('Stock Price Trends Weekly Box Plot')
         box_plot_volume.set_title('Stock Volume Trends Weekly Box Plot')
     elif (stockDataType == "monthly"):
+        print("\nMonthly Stock Central Tendency Measures: \n", centralTendencyMeasures)
+
         box_plot_price.set_title('Stock Price Trends Monthly Box Plot')
         box_plot_volume.set_title('Stock Volume Trends Monthly Box Plot')
 
@@ -106,12 +117,19 @@ def printStockDataGraphsAndCSVFile(stockDataType, equityNameSymbolPrompt):
 
             if (stockDataType == "intraday"):
                 fileNameToSave = 'stockTrends_Intraday_' + str(currentTime) + '.csv'
+                centralTendencyMeasures.to_csv("CentralTendencyMeasures_"+fileNameToSave)
+
             elif (stockDataType == "daily"):
                 fileNameToSave = 'stockTrends_Daily_' + str(currentTime) + '.csv'
+                centralTendencyMeasures.to_csv("CentralTendencyMeasures_"+fileNameToSave)
+
             elif (stockDataType == "weekly"):
                 fileNameToSave = 'stockTrends_Weekly_' + str(currentTime) + '.csv'
+                centralTendencyMeasures.to_csv("CentralTendencyMeasures_"+fileNameToSave)
+
             elif (stockDataType == "monthly"):
                 fileNameToSave = 'stockTrends_Monthly_' + str(currentTime) + '.csv'
+                centralTendencyMeasures.to_csv("CentralTendencyMeasures_"+fileNameToSave)
 
             with open(fileNameToSave, 'w', encoding="utf-8") as stockTrendsCSVFile:
                 stockCSVWriter = csv.writer(stockTrendsCSVFile, delimiter='\t')
@@ -323,20 +341,26 @@ def printCryptoDataGraphsAndCSVFile(cryptoDataType, equityNameSymbolPrompt, exch
                                         'Close Price': list(map(float, cryptoClosePriceValues)),
                                         'Volume': list(map(float, cryptoVolumeValues))})
 
+    centralTendencyMeasures = pandasDataFrame.describe()
+
     pandasDataFrame.boxplot(column=['Open Price', 'High Price', 'Low Price', 'Close Price'], figsize=(15, 5), grid=True,
                             ax=boxplot_price)
     pandasDataFrame.boxplot(column=['Volume'], figsize=(15, 5), grid=True, ax=boxplot_volume)
 
     if (cryptoDataType == "intraday"):
+        print("\nIntraday Crypto Price Central Tendency Measures = \n", centralTendencyMeasures)
         boxplot_price.set_title('Crypto Price Trends Intraday Box Plot')
         boxplot_volume.set_title('Crypto Volume Trends Intraday Box Plot')
     elif (cryptoDataType == "daily"):
+        print("\nDaily Crypto Price Central Tendency Measures = \n", centralTendencyMeasures)
         boxplot_price.set_title('Crypto Price Trends Daily Box Plot')
         boxplot_volume.set_title('Crypto Volume Trends Daily Box Plot')
     elif (cryptoDataType == "weekly"):
+        print("\nWeekly Crypto Price Central Tendency Measures = \n", centralTendencyMeasures)
         boxplot_price.set_title('Crypto Price Trends Weekly Box Plot')
         boxplot_volume.set_title('Crypto Volume Trends Weekly Box Plot')
     elif (cryptoDataType == "monthly"):
+        print("\nMonthly Crypto Price Central Tendency Measures =\n", centralTendencyMeasures)
         boxplot_price.set_title('Crypto Price Trends Monthly Box Plot')
         boxplot_volume.set_title('Crypto Volume Trends Monthly Box Plot')
 
@@ -354,12 +378,20 @@ def printCryptoDataGraphsAndCSVFile(cryptoDataType, equityNameSymbolPrompt, exch
 
             if (cryptoDataType == "intraday"):
                 fileNameToSave = 'cryptoTrends_Intraday_' + str(currentTime) + '.csv'
+                centralTendencyMeasures.to_csv("CentralTendencyMeasures_"+fileNameToSave)
+
             elif (cryptoDataType == "daily"):
                 fileNameToSave = 'cryptoTrends_Daily_' + str(currentTime) + '.csv'
+                centralTendencyMeasures.to_csv("CentralTendencyMeasures_"+fileNameToSave)
+
             elif (cryptoDataType == "weekly"):
                 fileNameToSave = 'cryptoTrends_Weekly_' + str(currentTime) + '.csv'
+                centralTendencyMeasures.to_csv("CentralTendencyMeasures_"+fileNameToSave)
+
             elif (cryptoDataType == "monthly"):
                 fileNameToSave = 'cryptoTrends_Monthly_' + str(currentTime) + '.csv'
+                centralTendencyMeasures.to_csv("CentralTendencyMeasures_"+fileNameToSave)
+
 
             with open(fileNameToSave, 'w', encoding="utf-8") as cryptoTrendsCSVFile:
                 cryptoCSVWriter = csv.writer(cryptoTrendsCSVFile, delimiter='\t')
@@ -471,16 +503,22 @@ def printForexGraphsAndCSVFile(forexDataType, fromSymbolPrompt, toSymbolPrompt):
         'Low Price': list(map(float, forexLowPriceValues)),
         'Close Price': list(map(float, forexClosePriceValues))})
 
+    centralTendencyMeasures = pandasDataFrame.describe()
+
     axisCoordinates = pandasDataFrame.boxplot(column=['Open Price', 'High Price', 'Low Price', 'Close Price'],
                                               figsize=(15, 5), grid=True)
 
     if (forexDataType == "intraday"):
+        print("\nIntraday Forex Trends Central Tendency Measures = \n", centralTendencyMeasures)
         axisCoordinates.set_title('Forex Trends Intraday Box Plot')
     elif (forexDataType == "daily"):
+        print("\Daily Forex Trends Central Tendency Measures = \n", centralTendencyMeasures)
         axisCoordinates.set_title('Forex Trends Daily Box Plot')
     elif (forexDataType == "weekly"):
+        print("\nWeekly Forex Trends Central Tendency Measures = \n", centralTendencyMeasures)
         axisCoordinates.set_title('Forex Trends Weekly Box Plot')
     elif (forexDataType == "monthly"):
+        print("\nMonthly Forex Trends Central Tendency Measures = \n", centralTendencyMeasures)
         axisCoordinates.set_title('Forex Trends Monthly Box Plot')
 
     pythonPlot.show()
@@ -497,12 +535,20 @@ def printForexGraphsAndCSVFile(forexDataType, fromSymbolPrompt, toSymbolPrompt):
 
             if (forexDataType == "intraday"):
                 fileNameToSave = 'forexTrends_Intraday_' + str(currentTime) + '.csv'
+                centralTendencyMeasures.to_csv("CentralTendencyMeasures_"+fileNameToSave)
+
             elif (forexDataType == "daily"):
                 fileNameToSave = 'forexTrends_Daily_' + str(currentTime) + '.csv'
+                centralTendencyMeasures.to_csv("CentralTendencyMeasures_"+fileNameToSave)
+
             elif (forexDataType == "weekly"):
                 fileNameToSave = 'forexTrends_Weekly_' + str(currentTime) + '.csv'
+                centralTendencyMeasures.to_csv("CentralTendencyMeasures_"+fileNameToSave)
+
             elif (forexDataType == "monthly"):
                 fileNameToSave = 'forexTrends_Monthly_' + str(currentTime) + '.csv'
+                centralTendencyMeasures.to_csv("CentralTendencyMeasures_"+fileNameToSave)
+
 
             with open(fileNameToSave, 'w', encoding="utf-8") as forexTrendsCSVFile:
                 forexCSVWriter = csv.writer(forexTrendsCSVFile, delimiter='\t')
