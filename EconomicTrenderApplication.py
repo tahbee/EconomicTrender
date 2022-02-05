@@ -456,13 +456,13 @@ def printForexGraphsAndCSVFile(forexDataType, fromSymbolPrompt, toSymbolPrompt):
 
     mostRecentForexTimeStampValues = forexTimeStampValues[:5]
 
-    mostRecentForexOpenPriceValues = forexOpenPriceValues[:5]
+    mostRecentForexOpenPriceValues = [float(x) for x in forexOpenPriceValues[:5]]
 
-    mostRecentForexHighPriceValues = forexHighPriceValues[:5]
+    mostRecentForexHighPriceValues = [float(x) for x in forexHighPriceValues[:5]]
 
-    mostRecentForexLowPriceValues = forexLowPriceValues[:5]
+    mostRecentForexLowPriceValues = [float(x) for x in forexLowPriceValues[:5]]
 
-    mostRecentForexClosePriceValues = forexClosePriceValues[:5]
+    mostRecentForexClosePriceValues = [float(x) for x in forexClosePriceValues[:5]]
 
     pandasDataFrame = pandas.DataFrame(dict(graph=mostRecentForexTimeStampValues,
                                             openingPrice=mostRecentForexOpenPriceValues,
