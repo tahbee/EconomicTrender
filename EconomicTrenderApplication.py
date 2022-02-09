@@ -43,13 +43,14 @@ def printStockDataGraphsAndCSVFile(stockDataType, equityNameSymbolPrompt):
                     label='Closing Price', align='center')
     plot_price.set(yticks=XAxisCoordinateLocations + width, yticklabels=pandasDataFrame.graph,
                    ylim=[2 * width - 1, len(pandasDataFrame)])
-    plot_price.legend()
+    plot_price.legend(bbox_to_anchor=(1, 1), loc='upper left')
 
     plot_volume.barh(XAxisCoordinateLocations + width, pandasDataFrame.volume, width, color='purple', label='Volume',
                      align='center')
     plot_volume.set(yticks=XAxisCoordinateLocations + width, yticklabels=pandasDataFrame.graph,
                     ylim=[2 * width - 1, len(pandasDataFrame)])
-    plot_volume.legend()
+    plot_volume.legend(bbox_to_anchor=(1, 1), loc='upper left')
+    figure.tight_layout()
 
     if (stockDataType == "intraday"):
         plot_price.set_title('Stock Price Trends Intraday Horizontal Bar Chart')
@@ -312,12 +313,13 @@ def printCryptoDataGraphsAndCSVFile(cryptoDataType, equityNameSymbolPrompt, exch
                     label='Closing Price', align='center')
     plot_price.set(yticks=XAxisCoordinateLocations + width, yticklabels=pandasDataFrame.graph,
                    ylim=[2 * width - 1, len(pandasDataFrame)])
-    plot_price.legend()
+    plot_price.legend(bbox_to_anchor=(1, 1), loc='upper left')
     plot_volume.barh(XAxisCoordinateLocations, pandasDataFrame.volume, .5, color='purple', label='Volume',
                      align='center')
     plot_volume.set(yticks=XAxisCoordinateLocations + width, yticklabels=pandasDataFrame.graph,
                     ylim=[2 * width - 1, len(pandasDataFrame)])
-    plot_volume.legend()
+    plot_volume.legend(bbox_to_anchor=(1, 1), loc='upper left')
+    figure.tight_layout()
 
     if (cryptoDataType == "intraday"):
         plot_price.set_title('Crypto Price Trends Intraday Horizontal Bar Chart')
@@ -482,7 +484,8 @@ def printForexGraphsAndCSVFile(forexDataType, fromSymbolPrompt, toSymbolPrompt):
 
     axis.set(yticks=XAxisCoordinateLocations + width, yticklabels=pandasDataFrame.graph,
              ylim=[2 * width - 1, len(pandasDataFrame)])
-    axis.legend()
+    axis.legend(bbox_to_anchor=(1, 1), loc='upper left')
+    figure.tight_layout()
 
     if (forexDataType == "intraday"):
         pythonPlot.title('Forex Trends Intraday Horizontal Bar Chart')
