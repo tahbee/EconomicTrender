@@ -577,7 +577,7 @@ if __name__ == '__main__':
                                 "\nOption 1 - Stock Time Series" +
                                 "\nOption 2 - Foreign Exchange Rate"
                                 "\nOption 3 - Cryptocurrencies" +
-                                "\nPlease enter a number between 1-3 to choose an option from the 3 categories above or press 0 to end the program: ")
+                                "\nPlease enter a number between 1-3 to choose an option or press 0 to end the program: ")
 
     if int(dataFeedOptionInput) == 1:
         equityNameSymbolPrompt = input("Please enter the Stock symbol of the equity you want to see information for: ")

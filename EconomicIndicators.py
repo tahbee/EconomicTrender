@@ -163,7 +163,12 @@ def economicIndicatorsData(dataOption):
             print("An exception occurred")
             
 while (True):
-    dataFeedOptionInput = input ("\nThis program shows the data containing the following options: 1) Annual Real GDP of US, 2) Monthly interest rates of US, 3) Annual Inflation rates of US and 4) Monthly Unemployment data of US. Enter an option number to continue or 0 to end the program: ")
+    dataFeedOptionInput = input ("\nThis program shows the data containing the following options: " +
+                                 "\n1) Annual Real GDP of US" +
+                                 "\n2) Monthly interest rates of US" +
+                                 "\n3) Annual Inflation rates of US" +
+                                 "\n4) Monthly Unemployment data of US" +
+                                 "\nEnter a number between 1-4 to continue or 0 to end the program: ")
     
     if (int(dataFeedOptionInput) == 1):
         economicIndicatorsData(1)
