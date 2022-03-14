@@ -1,9 +1,14 @@
 # EconomicTrender
+Please ensure the following tools and libraries are installed before running the project
 
+Download Python3: https://www.python.org/downloads/
+Any Integrated Development Environment (IDE) can be used to run the project. In our case, we used IDLE, which came as part of the Python download
 Make sure to have IDLE installed
 Run python version 3 (3.10)
-1) Requests is not a built in module (does not come with the default python installation), so you will have to install it:
 
+Install pip through following these steps: https://www.geeksforgeeks.org/how-to-install-pip-in-macos/
+
+Ensure Requests library is installed through the following ways:
 OSX/Linux
 Use $ pip install requests (or pip3 install requests for python3) if you have pip installed. If pip is installed but not in your path you can use python -m pip install requests (or python3 -m pip install requests for python3)
 
@@ -28,9 +33,10 @@ On mac osx and windows, after downloading the source zip, uncompress it and from
 Reference: https://stackoverflow.com/questions/17309288/importerror-no-module-named-requests
 
 
-2) You need to install pandas with:
+2) You need to install pandas library with this command:
 pip install pandas
-If you run into issues with privileges, you may need to run:
+
+If you run into issues with privileges, you may need to run as a sudo user:
 sudo pip install pandas
 It is also possible on Python 3 that you may need to run:
 pip3 install pandas (although pip may be pointing to pip3 already). You can read about differences between pip versions on this SO post.
@@ -44,4 +50,5 @@ Reference: https://stackoverflow.com/questions/54497098/import-pandas-as-pd-impo
 Reference: https://stackoverflow.com/questions/18176591/importerror-no-module-named-matplotlib-pyplot
 
 4) Install seaborn. Command: pip3 install seaborn
+5) Install numpy. Command: pip3 install numpy
 
