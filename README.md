@@ -1,54 +1,59 @@
-# EconomicTrender
+# EconomicTrender Installation
 Please ensure the following tools and libraries are installed before running the project
 
-Download Python3: https://www.python.org/downloads/
-Any Integrated Development Environment (IDE) can be used to run the project. In our case, we used IDLE, which came as part of the Python download
-Make sure to have IDLE installed
-Run python version 3 (3.10)
+* Python3 (version 3.10): https://www.python.org/downloads/
+* Pip: https://www.geeksforgeeks.org/how-to-install-pip-in-macos/
+* IDE
+  * Any Integrated Development Environment (IDE) can be used to run the project. In our case, we used IDLE, which came as part of the Python download
 
-Install pip through following these steps: https://www.geeksforgeeks.org/how-to-install-pip-in-macos/
+## Libraries Installation Instructions
+### 1) Requests
+**OSX/Linux**<br>
+Use ```$ pip install requests``` (or ```pip3 install requests``` for python3) if you have pip installed. If pip is installed but not in your path you can use ```python -m pip install requests``` (or ```python3 -m pip install requests``` for python3)
 
-Ensure Requests library is installed through the following ways:
-OSX/Linux
-Use $ pip install requests (or pip3 install requests for python3) if you have pip installed. If pip is installed but not in your path you can use python -m pip install requests (or python3 -m pip install requests for python3)
-
-Alternatively you can also use sudo easy_install -U requests if you have easy_install installed.
+Alternatively you can also use ```sudo easy_install -U requests``` if you have easy_install installed.
 
 Alternatively you can use your systems package manager:
+* For centos: ```yum install python-requests``` 
+* For Ubuntu: ```apt-get install python-requests```
 
-For centos: yum install python-requests For Ubuntu: apt-get install python-requests
+**Windows**<br>
+Use ```pip install requests``` (or ```pip3 install requests``` for python3) if you have pip installed and Pip.exe added to the Path Environment Variable. If pip is installed but not in your path you can use ```python -m pip install requests``` (or ```python3 -m pip install requests``` for python3)
 
-Windows
-Use pip install requests (or pip3 install requests for python3) if you have pip installed and Pip.exe added to the Path Environment Variable. If pip is installed but not in your path you can use python -m pip install requests (or python3 -m pip install requests for python3)
-
-Alternatively from a cmd prompt, use > Path\easy_install.exe requests, where Path is your Python*\Scripts folder, if it was installed. (For example: C:\Python32\Scripts)
+Alternatively from a cmd prompt, use ```> Path\easy_install.exe requests```, where Path is your Python*\Scripts folder, if it was installed. (For example: C:\Python32\Scripts)
 
 If you manually want to add a library to a windows machine, you can download the compressed library, uncompress it, and then place it into the Lib\site-packages folder of your python path. (For example: C:\Python27\Lib\site-packages)
 
 From Source (Universal)
 For any missing library, the source is usually available at https://pypi.python.org/pypi/. You can download requests here: https://pypi.python.org/pypi/requests
 
-On mac osx and windows, after downloading the source zip, uncompress it and from the termiminal/cmd run python setup.py install from the uncompressed dir.
+On mac osx and windows, after downloading the source zip, uncompress it and from the termiminal/cmd run ```python setup.py install``` from the uncompressed dir.
 
 Reference: https://stackoverflow.com/questions/17309288/importerror-no-module-named-requests
 
 
-2) You need to install pandas library with this command:
-pip install pandas
+### 2) Pandas
+Command: ```pip install pandas```
 
 If you run into issues with privileges, you may need to run as a sudo user:
-sudo pip install pandas
+```sudo pip install pandas```
 It is also possible on Python 3 that you may need to run:
-pip3 install pandas (although pip may be pointing to pip3 already). You can read about differences between pip versions on this SO post.
+```pip3 install pandas``` (although pip may be pointing to pip3 already). You can read about differences between pip versions on this SO post.
 If you don't have pip installed, see here for installation.
 
 Reference: https://stackoverflow.com/questions/54497098/import-pandas-as-pd-importerror-no-module-named-pandas
 
 
+### 3) Matplotlib
+Command: ```pip3 install matplotlib```
 
-3) Install matplotlib. Command: pip3 install matplotlib
 Reference: https://stackoverflow.com/questions/18176591/importerror-no-module-named-matplotlib-pyplot
 
-4) Install seaborn. Command: pip3 install seaborn
-5) Install numpy. Command: pip3 install numpy
+
+### 4) Seaborn
+Command: ```pip3 install seaborn```
+
+
+### 5) Numpy
+Command: ```pip3 install numpy```
 
