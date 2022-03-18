@@ -677,24 +677,28 @@ def economicIndicatorsData(dataOption):
         pythonPlot.title(
             'Line Graph of Annual Real GDP of US per year for last 10 years (Download the CSV file at the end to see complete data of all the years in the past)',
             fontsize=10)
+        pythonPlot.ylabel('Real GDP (Billions of US Dollars) ', fontsize=10)
 
     elif (dataOption == 4):
         pythonPlot.title(
             'Line Graph of Monthly Unemployment Rate Of US for last 10 months (Download the CSV file at the end to see complete data of all the years in the past)',
             fontsize=10)
+        pythonPlot.ylabel('Unemployment Rate', fontsize=10)
 
     elif (dataOption == 2):
         pythonPlot.title(
             'Line Graph of Monthly Interest Rate Of US for last 10 months (Download the CSV file at the end to see complete data of all the years in the past)',
             fontsize=10)
+        pythonPlot.ylabel('Interest Rate', fontsize=10)
 
     elif (dataOption == 3):
         pythonPlot.title(
             'Line Graph of Annual Inflation Rate Of US per year for last 10 years (Download the CSV file at the end to see complete data of all the years in the past)',
             fontsize=10)
+        pythonPlot.ylabel('Inflation Rate', fontsize=10)
 
     pythonPlot.xlabel('Date', fontsize=10)
-    pythonPlot.ylabel('Value', fontsize=10)
+
     pythonPlot.grid(True)
     pythonPlot.show()
 
@@ -714,18 +718,23 @@ def economicIndicatorsData(dataOption):
     if (dataOption == 1):
         axis.set_title(
             'Scatter Plot For Annual Real GDP of US per year (With 95% Confidence Interval Linear Regression Model Fit)')
+        pythonPlot.ylabel('Real GDP (Billions of US Dollars) ', fontsize=10)
 
     elif (dataOption == 4):
         axis.set_title(
             'Scatter Plot For Monthly Unemployment rates of US (With 95% Confidence Interval Linear Regression Model Fit)')
+        pythonPlot.ylabel('Unemployment Rate', fontsize=10)
 
     elif (dataOption == 2):
         axis.set_title(
             'Scatter Plot For Monthly Interest rates of US (With 95% Confidence Interval Linear Regression Model Fit)')
+        pythonPlot.ylabel('Interest Rate', fontsize=10)
 
     elif (dataOption == 3):
         axis.set_title(
             'Scatter Plot For Annual Inflation rates of US (With 95% Confidence Interval Linear Regression Model Fit)')
+        pythonPlot.ylabel('Inflation Rate', fontsize=10)
+
 
     axis.xaxis.set_major_formatter(formattedDateValues)
 
@@ -739,15 +748,19 @@ def economicIndicatorsData(dataOption):
 
     if (dataOption == 1):
         axisCoordinates.set_title('Box Plot For Annual Real GDP of US per year')
+        pythonPlot.ylabel('Real GDP (Billions of US Dollars) ', fontsize=10)
 
     elif (dataOption == 4):
         axisCoordinates.set_title('Box Plot For Monthly Unemployment rates of US')
+        pythonPlot.ylabel('Unemployment Rate', fontsize=10)
 
     elif (dataOption == 2):
         axisCoordinates.set_title('Box Plot For Monthly Interest rates of US')
+        pythonPlot.ylabel('Interest Rate', fontsize=10)
 
     elif (dataOption == 3):
         axisCoordinates.set_title('Box Plot For Annual Inflation rates of US')
+        pythonPlot.ylabel('Inflation Rate ', fontsize=10)
 
     pythonPlot.show()
 
