@@ -59,15 +59,23 @@ def printStockDataGraphsAndCSVFile(stockDataType, equityNameSymbolPrompt):
         if (stockDataType == "intraday"):
             plot_price.set_title('Stock Price Trends Intraday Horizontal Bar Chart')
             plot_volume.set_title('Stock Volume Trends Intraday Horizontal Bar Chart')
+            plot_price.set_xlabel('Stock Price', fontsize=10)
+            plot_volume.set_xlabel('Stock Volume ', fontsize=10)
         elif (stockDataType == "daily"):
             plot_price.set_title('Stock Price Trends Daily Horizontal Bar Chart')
             plot_volume.set_title('Stock Volume Trends Daily Horizontal Bar Chart')
+            plot_price.set_xlabel('Stock Price', fontsize=10)
+            plot_volume.set_xlabel('Stock Volume ', fontsize=10)
         elif (stockDataType == "weekly"):
             plot_price.set_title('Stock Price Trends Weekly Horizontal Bar Chart')
             plot_volume.set_title('Stock Volume Trends Weekly Horizontal Bar Chart')
+            plot_price.set_xlabel('Stock Price', fontsize=10)
+            plot_volume.set_xlabel('Stock Volume ', fontsize=10)
         elif (stockDataType == "monthly"):
             plot_price.set_title('Stock Price Trends Monthly Horizontal Bar Chart')
             plot_volume.set_title('Stock Volume Trends Monthly Horizontal Bar Chart')
+            plot_price.set_xlabel('Stock Price', fontsize=10)
+            plot_volume.set_xlabel('Stock Volume ', fontsize=10)
 
         pythonPlot.show()
 
@@ -87,24 +95,28 @@ def printStockDataGraphsAndCSVFile(stockDataType, equityNameSymbolPrompt):
 
         if (stockDataType == "intraday"):
             print("\nIntraday Stock Central Tendency Measures: \n", centralTendencyMeasures)
-
             box_plot_price.set_title('Stock Price Trends Intraday Box Plot')
             box_plot_volume.set_title('Stock Volume Trends Intraday Box Plot ')
+            box_plot_price.set_ylabel('Stock Price', fontsize=10)
+            box_plot_volume.set_ylabel('Stock Volume ', fontsize=10)
         elif (stockDataType == "daily"):
             print("\nDaily Stock Central Tendency Measures: \n", centralTendencyMeasures)
-
             box_plot_price.set_title('Stock Price Trends Daily Box Plot')
             box_plot_volume.set_title('Stock Volume Trends Daily Box Plot ')
+            box_plot_price.set_ylabel('Stock Price', fontsize=10)
+            box_plot_volume.set_ylabel('Stock Volume ', fontsize=10)
         elif (stockDataType == "weekly"):
             print("\nWeekly Stock Central Tendency Measures: \n", centralTendencyMeasures)
-
             box_plot_price.set_title('Stock Price Trends Weekly Box Plot')
             box_plot_volume.set_title('Stock Volume Trends Weekly Box Plot')
+            box_plot_price.set_ylabel('Stock Price', fontsize=10)
+            box_plot_volume.set_ylabel('Stock Volume ', fontsize=10)
         elif (stockDataType == "monthly"):
             print("\nMonthly Stock Central Tendency Measures: \n", centralTendencyMeasures)
-
             box_plot_price.set_title('Stock Price Trends Monthly Box Plot')
             box_plot_volume.set_title('Stock Volume Trends Monthly Box Plot')
+            box_plot_price.set_ylabel('Stock Price', fontsize=10)
+            box_plot_volume.set_ylabel('Stock Volume ', fontsize=10)
 
         pythonPlot.show()
 
@@ -318,15 +330,23 @@ def printCryptoDataGraphsAndCSVFile(cryptoDataType, equityNameSymbolPrompt, exch
         if (cryptoDataType == "intraday"):
             plot_price.set_title('Crypto Price Trends Intraday Horizontal Bar Chart')
             plot_volume.set_title('Crypto Volume Trends Intraday Horizontal Bar Chart')
+            plot_price.set_xlabel('Crypto Price', fontsize=10)
+            plot_volume.set_xlabel('Crypto Volume ', fontsize=10)
         elif (cryptoDataType == "daily"):
             plot_price.set_title('Crypto Price Trends Daily Horizontal Bar Chart')
             plot_volume.set_title('Crypto Volume Trends Daily Horizontal Bar Chart')
+            plot_price.set_xlabel('Crypto Price', fontsize=10)
+            plot_volume.set_xlabel('Crypto Volume ', fontsize=10)
         elif (cryptoDataType == "weekly"):
             plot_price.set_title('Crypto Price Trends Weekly Horizontal Bar Chart')
             plot_volume.set_title('Crypto Volume Trends Weekly Horizontal Bar Chart')
+            plot_price.set_xlabel('Crypto Price', fontsize=10)
+            plot_volume.set_xlabel('Crypto Volume ', fontsize=10)
         elif (cryptoDataType == "monthly"):
             plot_price.set_title('Crypto Price Trends Monthly Horizontal Bar Chart')
             plot_volume.set_title('Crypto Volume Trends Monthly Horizontal Bar Chart')
+            plot_price.set_xlabel('Crypto Price', fontsize=10)
+            plot_volume.set_xlabel('Crypto Volume ', fontsize=10)
         pythonPlot.show()
 
         boxPlotFigure, (boxplot_price, boxplot_volume) = pythonPlot.subplots(2)
@@ -347,18 +367,26 @@ def printCryptoDataGraphsAndCSVFile(cryptoDataType, equityNameSymbolPrompt, exch
             print("\nIntraday Crypto Price Central Tendency Measures = \n", centralTendencyMeasures)
             boxplot_price.set_title('Crypto Price Trends Intraday Box Plot')
             boxplot_volume.set_title('Crypto Volume Trends Intraday Box Plot')
+            boxplot_price.set_ylabel('Crypto Price', fontsize=10)
+            boxplot_volume.set_ylabel('Crypto Volume ', fontsize=10)
         elif (cryptoDataType == "daily"):
             print("\nDaily Crypto Price Central Tendency Measures = \n", centralTendencyMeasures)
             boxplot_price.set_title('Crypto Price Trends Daily Box Plot')
             boxplot_volume.set_title('Crypto Volume Trends Daily Box Plot')
+            boxplot_price.set_ylabel('Crypto Price', fontsize=10)
+            boxplot_volume.set_ylabel('Crypto Volume ', fontsize=10)
         elif (cryptoDataType == "weekly"):
             print("\nWeekly Crypto Price Central Tendency Measures = \n", centralTendencyMeasures)
             boxplot_price.set_title('Crypto Price Trends Weekly Box Plot')
             boxplot_volume.set_title('Crypto Volume Trends Weekly Box Plot')
+            boxplot_price.set_ylabel('Crypto Price', fontsize=10)
+            boxplot_volume.set_ylabel('Crypto Volume ', fontsize=10)
         elif (cryptoDataType == "monthly"):
             print("\nMonthly Crypto Price Central Tendency Measures =\n", centralTendencyMeasures)
             boxplot_price.set_title('Crypto Price Trends Monthly Box Plot')
             boxplot_volume.set_title('Crypto Volume Trends Monthly Box Plot')
+            boxplot_price.set_ylabel('Crypto Price', fontsize=10)
+            boxplot_volume.set_ylabel('Crypto Volume ', fontsize=10)
 
         pythonPlot.show()
 
@@ -481,12 +509,16 @@ def printForexGraphsAndCSVFile(forexDataType, fromSymbolPrompt, toSymbolPrompt):
 
         if (forexDataType == "intraday"):
             pythonPlot.title('Forex Trends Intraday Horizontal Bar Chart')
+            pythonPlot.xlabel('Exchange Rate', fontsize=10)
         elif (forexDataType == "daily"):
             pythonPlot.title('Forex Trends Daily Horizontal Bar Chart')
+            pythonPlot.xlabel('Exchange Rate', fontsize=10)
         elif (forexDataType == "weekly"):
             pythonPlot.title('Forex Trends Weekly Horizontal Bar Chart')
+            pythonPlot.xlabel('Exchange Rate', fontsize=10)
         elif (forexDataType == "monthly"):
             pythonPlot.title('Forex Trends Monthly Horizontal Bar Chart')
+            pythonPlot.xlabel('Exchange Rate', fontsize=10)
 
         pythonPlot.show()
 
@@ -506,15 +538,19 @@ def printForexGraphsAndCSVFile(forexDataType, fromSymbolPrompt, toSymbolPrompt):
         if (forexDataType == "intraday"):
             print("\nIntraday Forex Trends Central Tendency Measures = \n", centralTendencyMeasures)
             axisCoordinates.set_title('Forex Trends Intraday Box Plot')
+            pythonPlot.ylabel('Exchange Rate', fontsize=10)
         elif (forexDataType == "daily"):
             print("\Daily Forex Trends Central Tendency Measures = \n", centralTendencyMeasures)
             axisCoordinates.set_title('Forex Trends Daily Box Plot')
+            pythonPlot.ylabel('Exchange Rate', fontsize=10)
         elif (forexDataType == "weekly"):
             print("\nWeekly Forex Trends Central Tendency Measures = \n", centralTendencyMeasures)
             axisCoordinates.set_title('Forex Trends Weekly Box Plot')
+            pythonPlot.ylabel('Exchange Rate', fontsize=10)
         elif (forexDataType == "monthly"):
             print("\nMonthly Forex Trends Central Tendency Measures = \n", centralTendencyMeasures)
             axisCoordinates.set_title('Forex Trends Monthly Box Plot')
+            pythonPlot.ylabel('Exchange Rate', fontsize=10)
 
         pythonPlot.show()
 
